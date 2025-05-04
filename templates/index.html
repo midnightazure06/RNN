@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Analisis Sentimen - Kim Soo Hyun & Kim Sae Ron</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Analisis Sentimen Publik terhadap Kontroversi Kim Soo Hyun & Kim Sae Ron di Media Sosial Menggunakan LSTM</h1>
+
+        <section>
+            <h2>Distribusi Sentimen</h2>
+            <img src="{{ url_for('static', filename='barplot.png') }}" alt="Distribusi Sentimen" class="image">
+        </section>
+
+        <section>
+            <h2>Visualisasi Aktivitas & Platform</h2>
+            <div class="flex-images">
+                <div>
+                    <h3>Aktivitas Komentar per Hari</h3>
+                    <img src="{{ url_for('static', filename='aktivitas_per_hari.png') }}" alt="Aktivitas Harian">
+                </div>
+                <div>
+                    <h3>Distribusi Komentar per Platform</h3>
+                    <img src="{{ url_for('static', filename='distribusi_platform.png') }}" alt="Distribusi Platform">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Wordcloud Komentar</h2>
+            <div class="wordclouds">
+                <div>
+                    <h3>Positif</h3>
+                    <img src="{{ url_for('static', filename='wordcloud_pos.png') }}" alt="Wordcloud Positif">
+                </div>
+                <div>
+                    <h3>Netral</h3>
+                    <img src="{{ url_for('static', filename='wordcloud_netral.png') }}" alt="Wordcloud Netral">
+                </div>
+                <div>
+                    <h3>Negatif</h3>
+                    <img src="{{ url_for('static', filename='wordcloud_neg.png') }}" alt="Wordcloud Negatif">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Klasifikasikan Komentar Baru</h2>
+            <form action="/" method="post">
+                <textarea name="komentar" rows="4" cols="60" placeholder="Masukkan komentar..." required></textarea><br>
+                <button type="submit">Klasifikasikan</button>
+            </form>
+
+            {% if komentar %}
+            <div class="result">
+                <h3>Hasil Klasifikasi:</h3>
+                <p><strong>Komentar:</strong> {{ komentar }}</p>
+                <p><strong>Sentimen:</strong> <span class="sentimen {{ sentimen|lower }}">{{ sentimen }}</span></p>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>
